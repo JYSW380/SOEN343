@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.security.PermitAll;
 import java.util.List;
 
 @RestController
@@ -28,5 +29,8 @@ public class ProductController implements IProductController {
         productRepository.addProducts(productId, qty);
     }
 
-
+    @RequestMapping(path = "/delete/{productId}/{qty}", method = RequestMethod.GET)
+    public void deleteProducts(@PathVariable int productId, @PathVariable int qty) throws Exception {
+        productRepository.removeProducts(productId, qty);
+    }
 }

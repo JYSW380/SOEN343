@@ -14,4 +14,5 @@ public interface IProductRepository {
 
     public Product updateProduct(int productId, Product product);
 
+    public Product getProductById(int productId);
 }

@@ -19,4 +19,6 @@ public interface ICartRepository {
     public Cart removeItem(int userId, CartItem item);
 
     public Cart removeQty(int userId, int productId, int qty);
+
+    public CartItem getCartItemQty(int userId, int productId);
 }

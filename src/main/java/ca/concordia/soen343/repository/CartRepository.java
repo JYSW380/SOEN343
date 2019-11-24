@@ -23,10 +23,7 @@ public class CartRepository implements ICartRepository {
 
     @Override
     public Cart createCart(int userId) {
-        System.out.println(userId);
-        ArrayList<CartItem> a = new ArrayList<>();
-        a.add(new CartItem(1,4));
-        repo.put(userId, new Cart(userId, a));
+        repo.put(userId, new Cart(userId, new ArrayList<>()));
         return repo.get(userId);
     }
 
@@ -58,7 +55,7 @@ public class CartRepository implements ICartRepository {
 
     @Override
     public Cart removeItem(int userId, CartItem item) {
-        List<CartItem> newList = repo.get(userId).getItemsList().stream().filter(itemInList -> itemInList.getProductId() == item.getProductId()).collect(Collectors.toList());
+        List<CartItem> newList = repo.get(userId).getItemsList().stream().filter(itemInList -> itemInList.getProductId() != item.getProductId()).collect(Collectors.toList());
         repo.get(userId).setItemsList(newList);
         return repo.get(userId);
     }
@@ -72,4 +69,9 @@ public class CartRepository implements ICartRepository {
         items.get(index).setQty(newQty);
         return repo.get(userId);
     }
+
+    public CartItem getCartItemQty(int userId, int productId) {
+        return getCartByUserId(userId).getItemsList().stream().filter(i -> i.getProductId() == productId).collect(Collectors.toList()).get(0);
+    }
 }
+

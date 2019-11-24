@@ -49,4 +49,9 @@ public class ProductRepository implements IProductRepository {
         return repo.values().stream().collect(Collectors.toList());
     }
 
+    @Override
+    public Product getProductById(int productId){
+        return repo.values().stream().filter(prod -> prod.getId() == productId).collect(Collectors.toList()).get(0);
+    }
+
 }
