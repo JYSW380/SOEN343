@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 @Repository
 public class ProductRepository implements IProductRepository {
 
-
     private Map<Integer , Product> repo;
 
     public ProductRepository(){
@@ -22,19 +21,21 @@ public class ProductRepository implements IProductRepository {
     }
 
     @Override
-    public void addProducts(int productId, int qty) {
+    public List<Product> addProducts(int productId, int qty) {
         int newQty = repo.get(productId).getQty() + qty;
         repo.get(productId).setQty(newQty);
+        return repo.values().stream().collect(Collectors.toList());
     }
 
     @Override
-    public void removeProducts(int productId, int qty) throws Exception {
+    public List<Product> removeProducts(int productId, int qty) throws Exception {
         int newQty = repo.get(productId).getQty() - qty;
         if(newQty < 0) {
             throw new Exception("The inventory is zero. Can't reduce it");
         } else {
             repo.get(productId).setQty(newQty);
         }
+        return repo.values().stream().collect(Collectors.toList());
     }
 
     @Override
@@ -42,7 +43,6 @@ public class ProductRepository implements IProductRepository {
         Product pro = repo.put(productId, product);
         return pro;
     }
-
 
     @Override
     public List<Product> getAllProducts(){
@@ -53,5 +53,4 @@ public class ProductRepository implements IProductRepository {
     public Product getProductById(int productId){
         return repo.values().stream().filter(prod -> prod.getId() == productId).collect(Collectors.toList()).get(0);
     }
-
 }

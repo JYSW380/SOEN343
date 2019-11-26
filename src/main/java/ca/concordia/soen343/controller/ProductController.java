@@ -24,13 +24,14 @@ public class ProductController implements IProductController {
     }
 
     @RequestMapping(path = "/{productId}/{qty}", method = RequestMethod.GET)
-    public void addProducts(
+    public List<Product> addProducts(
             @PathVariable int productId, @PathVariable int qty){
-        productRepository.addProducts(productId, qty);
+    		
+        return productRepository.addProducts(productId, qty);
     }
 
     @RequestMapping(path = "/delete/{productId}/{qty}", method = RequestMethod.GET)
-    public void deleteProducts(@PathVariable int productId, @PathVariable int qty) throws Exception {
-        productRepository.removeProducts(productId, qty);
+    public List<Product> deleteProducts(@PathVariable int productId, @PathVariable int qty) throws Exception {
+        return productRepository.removeProducts(productId, qty);
     }
 }

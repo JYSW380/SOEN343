@@ -8,9 +8,9 @@ public interface IProductRepository {
 
     public List<Product> getAllProducts();
 
-    public void addProducts(int productId, int Qty);
+    public List<Product> addProducts(int productId, int Qty);
 
-    public void removeProducts(int productId, int Qty) throws Exception;
+    public List<Product> removeProducts(int productId, int Qty) throws Exception;
 
     public Product updateProduct(int productId, Product product);
 
